@@ -46,7 +46,7 @@ function addMeal(mealData, random = false){
     meal.classList.add('meal');
 
     meal.innerHTML = `
-                <div class="meal-header">
+                <div class="meal-header" id="meal-header">
                     ${random ? `<span class="random">Random recipe</span>` : ''}
                     <img src="${mealData.strMealThumb}" alt="${mealData.strMeal}">
                 </div>
@@ -55,7 +55,18 @@ function addMeal(mealData, random = false){
                     <button class="fav-btn"><i class="fas fa-heart"></i></button>
                 </div>`;
     
-    const btn = meal.querySelector(".meal-body .fav-btn");         
+    const btn = meal.querySelector(".meal-body .fav-btn"); 
+    const span = meal.querySelector("span");
+    const h4 = meal.querySelector("h4");
+    const mealHeader = meal.querySelector("#meal-header");
+    
+    span.addEventListener('click', () => {
+        location.reload();
+    })
+
+    h4.addEventListener('click', () => {
+        showMealInfo(mealData);
+    })
                 
     btn.addEventListener('click', () => {
         if (btn.classList.contains("active")){
@@ -69,7 +80,7 @@ function addMeal(mealData, random = false){
         fetchFavMeals();
     });
 
-    meal.addEventListener("click", () => {
+    mealHeader.addEventListener("click", () => {
         showMealInfo(mealData);
     });
 
@@ -129,10 +140,17 @@ function addMealFav(mealData){
         fetchFavMeals();
     });
 
-    favMeal.addEventListener("click", () => {
+    const img = favMeal.querySelector("img");
+    const span = favMeal.querySelector("span");
+
+    img.addEventListener("click", () => {
         showMealInfo(mealData);
     });
     
+    span.addEventListener("click", () => {
+        showMealInfo(mealData);
+    });
+
     favoriteContainer.appendChild(favMeal);
     };
 
