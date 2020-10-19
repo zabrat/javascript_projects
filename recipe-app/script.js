@@ -15,8 +15,6 @@ async function getRandomMeal(){
     const resp = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
     const respData = await resp.json();
     const randomMeal = respData.meals[0];
-    
-    console.log(randomMeal);
 
     addMeal(randomMeal, true);
 }
@@ -40,7 +38,6 @@ async function getMealsBySearch(term){
 }
 
 function addMeal(mealData, random = false){
-    console.log(mealData);
 
     const meal = document.createElement('div');
     meal.classList.add('meal');
@@ -59,10 +56,6 @@ function addMeal(mealData, random = false){
     const span = meal.querySelector("span");
     const h4 = meal.querySelector("h4");
     const mealHeader = meal.querySelector("#meal-header");
-    
-    span.addEventListener('click', () => {
-        location.reload();
-    })
 
     h4.addEventListener('click', () => {
         showMealInfo(mealData);
@@ -118,8 +111,6 @@ async function fetchFavMeals(){
         
         addMealFav(meal);
     }
-
-    console.log(meals);
 }
 
 function addMealFav(mealData){
@@ -184,7 +175,6 @@ function showMealInfo(mealData) {
         }
         
     }
-    console.log(ingredients)
     mealEl.innerHTML = `
     <h1>${mealData.strMeal}</h1>
     <img src="${mealData.strMealThumb}" alt="${mealData.strMeal}">
